@@ -32,9 +32,10 @@ namespace Obshtejitie
                         string roomNumber = Console.ReadLine();
                         Console.Write("Въведете етаж: ");
                         int floor = int.Parse(Console.ReadLine());
-                        Console.Write("Въведете вместимост: ");
+                        Console.Write("Въведете капацитет: ");
                         int capacity = int.Parse(Console.ReadLine());
-                        dormitory.AddRoom(new Room(roomNumber, floor, capacity));
+
+                        dormitory.AddRoom(new Room(roomNumber, floor,capacity));
                         break;
 
                     case "2":

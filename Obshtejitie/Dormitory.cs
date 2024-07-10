@@ -5,27 +5,75 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Obshtejitie
 {
     internal class Dormitory
     {
-        public string Name {  get; set; }
+        private string name;
+        private string adress;
+        private string manager;
+        private int dormitoryNumber;
+        private string university;
+        public string Name
+        {
+            get { return name; }
+            set
+            {                
+                name = value;
+            }
+        }
 
-        public string Address { get; set; }
-        public string Manager { get; set; }
+        public string Adress
+        {
+            get { return adress; }
+            set
+            {
+                
+                adress = value;
+            }
+        }
+        public string Manager
+        {
+            get { return manager; }
+            set
+            {
+                manager = value;
+            }
+        }
+        public int DormitoryNumber
+        {
+            get { return dormitoryNumber; }
+            set
+            {               
+                if (DormitoryNumber > 5)
+                {
+                    throw new ArgumentException("Номерът на общежитието не може да бъде по-голям от 5.");
+                }
+                dormitoryNumber = value;
+            }
+        }
+        public string University
+        {
+            get { return university; }
+            set
+            {               
+                university = value;
+            }
+        }
 
         private List<Room> rooms = new List<Room>(); private List<Student> students = new List<Student>();
         public Dormitory(string name, string address, string manager)
         {
             Name = name;
-            Address = address;
+            Adress = address;
             Manager = manager;
         }
         public void AddRoom(Room room)
         {
             rooms.Add(room);
-            Console.WriteLine($"Стая {room.RoomNumber} добавена успешно.");
+            Console.WriteLine($"Стая {room.RoomNumber} е добавена успешно.");
         }
         public void RemoveRoom(string roomNumber)
         {
