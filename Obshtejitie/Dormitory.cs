@@ -10,81 +10,41 @@ using System.Xml.Linq;
 namespace Obshtejitie
 {
     internal class Dormitory
-    {
-        private string name;
-        private string adress;
-        private string manager;
-        private int dormitoryNumber;
-        private string university;
-        public string Name
-        {
-            get { return name; }
-            set
-            {                
-                name = value;
-            }
-        }
+    { 
+        public string Name { get; set; }
 
-        public string Adress
-        {
-            get { return adress; }
-            set
-            {
-                
-                adress = value;
-            }
-        }
-        public string Manager
-        {
-            get { return manager; }
-            set
-            {
-                manager = value;
-            }
-        }
-        public int DormitoryNumber
-        {
-            get { return dormitoryNumber; }
-            set
-            {               
-                if (DormitoryNumber > 5)
-                {
-                    throw new ArgumentException("Номерът на общежитието не може да бъде по-голям от 5.");
-                }
-                dormitoryNumber = value;
-            }
-        }
-        public string University
-        {
-            get { return university; }
-            set
-            {               
-                university = value;
-            }
-        }
+        public string Address { get; set; }
+        public string Manager { get; set; }
 
         private List<Room> rooms = new List<Room>(); private List<Student> students = new List<Student>();
         public Dormitory(string name, string address, string manager)
         {
             Name = name;
-            Adress = address;
+            Address = address;
             Manager = manager;
         }
         public void AddRoom(Room room)
         {
             rooms.Add(room);
-            Console.WriteLine($"Стая {room.RoomNumber} е добавена успешно.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Стая {room.RoomNumber} добавена успешно.");
+            Console.ReadLine();
         }
         public void RemoveRoom(string roomNumber)
         {
             Room room = rooms.Find(r => r.RoomNumber == roomNumber);
             if (room != null)
-            { rooms.Remove(room); 
-                Console.WriteLine($"Стая {roomNumber} премахната успешно"); 
+            {
+                rooms.Remove(room);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Стая {roomNumber} премахната успешно");
+                Console.ReadLine();
             }
             else
-            { 
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Стая {roomNumber} не съществува");
+                Console.ReadLine();
             }
         }
 
@@ -94,16 +54,21 @@ namespace Obshtejitie
         }
         public void ListAllRooms()
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Всички стаи:");
             foreach (var room in rooms)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine($"Стая {room.RoomNumber}-Етаж: {room.Floor}, Вместимост: {room.Capacity}, Заети легла: {room.OccupiedBeds}, Свободни: {room.IsAvailable}");
+                Console.ReadLine();
             }
         }
         public void RegisterStudent(Student student)
         {
-           students.Add(student);
+            students.Add(student);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Студент {student.FullName} регистриран успешно");
+            Console.ReadLine();
         }
 
         public void AssignRoom(string studentID, string roomNumber)
@@ -113,9 +78,16 @@ namespace Obshtejitie
             if (student != null && room != null && room.IsAvailable)
             {
                 student.RoomNumber = roomNumber; room.OccupiedBeds++;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Студент {student.FullName} настанен в стая {roomNumber}.");
+                Console.ReadLine();
             }
-            else { Console.WriteLine("Грешка: Настаняването в стая се провали"); }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Грешка: Настаняването в стая се провали");
+                Console.ReadLine();
+            }
         }
 
         public void VacateRoom(string studentID)
@@ -125,19 +97,26 @@ namespace Obshtejitie
             {
                 Room room = rooms.Find(r => r.RoomNumber == student.RoomNumber);
                 room.OccupiedBeds--; student.RoomNumber = null;
-                Console.WriteLine($"Студент { student.FullName} освободи стая { room.RoomNumber}.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Студент {student.FullName} освободи стая {room.RoomNumber}.");
+                Console.ReadLine();
             }
-            else 
-            { 
-                Console.WriteLine("Грешка: Освобожаването на стая се провали"); 
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Грешка: Освобожаването на стая се провали");
+                Console.ReadLine();
             }
         }
         public void GenerateReport()
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Репорт на общежитие:");
             foreach (var room in rooms)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine($"Стая {room.RoomNumber}: {room.OccupiedBeds}/{room.Capacity} заети легла");
+                Console.ReadLine();
             }
         }
 
