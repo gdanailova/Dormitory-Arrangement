@@ -78,4 +78,4 @@
 | Освобождаване на стая      | S12345                  | Студентът е освободен успешно   |
 | Премахване на стая         | R101                    | Стаята е премахната успешно     |
   
-### Sourcecode: https://github.com/YoanaG123/Zadanie2.git
+### [Source Code](https://github.com/YoanaG123/Zadanie2.git)
